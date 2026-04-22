@@ -198,6 +198,20 @@ const newArrivals = [
 
 const recentlyViewed = [
   {
+    id: 8,
+    name: 'Luna Dial Watch',
+    brand: 'Nord',
+    category: 'Style',
+    price: 149,
+    originalPrice: 210,
+    rating: 4.8,
+    reviews: 109,
+    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80',
+    badge: 'Giftable',
+    stock: 10,
+    description: 'A minimal dial and polished bracelet that elevate even the simplest outfits.',
+  },
+  {
     id: 9,
     name: 'Weekend Layers Rack',
     brand: 'Open Wardrobe',
@@ -595,7 +609,7 @@ export default function HomePage() {
           />
           <div className="mt-8 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
             <a href="#new-arrivals" className="group relative overflow-hidden rounded-[34px]">
-              <div className="aspect-[4/4.5]">
+              <div className="aspect-[3/3]">
                 <img
                   src={collectionCards[0].image}
                   alt={collectionCards[0].title}
@@ -615,7 +629,7 @@ export default function HomePage() {
             <div className="grid gap-5">
               {collectionCards.slice(1).map((card) => (
                 <a key={card.title} href="#new-arrivals" className="group relative overflow-hidden rounded-[30px]">
-                  <div className="aspect-[4/2.45]">
+                  <div className="aspect-[3/1.8]">
                     <img
                       src={card.image}
                       alt={card.title}

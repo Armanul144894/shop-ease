@@ -51,7 +51,7 @@ export default function ProductCard({ product, delay = 0 }) {
       </div>
 
       <div className="relative overflow-hidden bg-stone-100">
-        <div className="aspect-[4/4.6]">
+        <div className="aspect-[4/2.5]">
           <img
             src={product.image}
             alt={product.name}
