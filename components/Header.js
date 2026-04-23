@@ -1,17 +1,22 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Heart, MapPin, Menu, Search, ShoppingBag, Sparkles, User, X } from 'lucide-react';
 
 const navigation = [
-  { label: 'New In', href: '#new-arrivals' },
-  { label: 'Brands', href: '#brands' },
-  { label: 'Collections', href: '#collections' },
-  { label: 'Flash Sale', href: '#flash-sale' },
-  { label: 'Journal', href: '#journal' },
+  { label: 'Home', href: '/' },
+  { label: 'Products', href: '/products' },
+  { label: 'Brands', href: '/brands' },
+  { label: 'Categories', href: '/categories' },
+  { label: 'Journal', href: '/#journal' },
 ];
 
-const quickFilters = ['Resort edit', 'Studio tech', 'Home mood'];
+const quickFilters = [
+  { label: 'Style', href: '/style' },
+  { label: 'Tech', href: '/tech' },
+  { label: 'Home', href: '/home' },
+];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -50,7 +55,7 @@ export default function Header() {
       >
         <div className="container py-4">
           <div className="flex items-center gap-4">
-            <a href="#" className="flex shrink-0 items-center gap-3">
+            <Link href="/" className="flex shrink-0 items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-white shadow-lg shadow-primary/20">
                 <span className="font-display text-2xl font-bold leading-none">S</span>
               </div>
@@ -58,17 +63,17 @@ export default function Header() {
                 <p className="font-display text-3xl font-bold leading-none text-stone-900">ShopEase</p>
                 <p className="text-[11px] uppercase tracking-[0.35em] text-stone-500">Studio store</p>
               </div>
-            </a>
+            </Link>
 
             <nav className="hidden flex-1 items-center justify-center gap-7 lg:flex">
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.label}
                   href={item.href}
                   className="text-sm font-semibold text-stone-600 transition-colors hover:text-primary"
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </nav>
 
@@ -105,13 +110,13 @@ export default function Header() {
 
           <div className="mt-4 hidden flex-wrap items-center gap-2 md:flex">
             {quickFilters.map((filter) => (
-              <a
-                key={filter}
-                href="#collections"
+              <Link
+                key={filter.label}
+                href={filter.href}
                 className="rounded-full border border-stone-200 bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-stone-500 transition hover:border-primary hover:text-primary"
               >
-                {filter}
-              </a>
+                {filter.label}
+              </Link>
             ))}
           </div>
         </div>
@@ -131,24 +136,26 @@ export default function Header() {
               </label>
               <div className="mt-4 flex flex-col gap-2">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.label}
                     href={item.href}
                     className="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-semibold text-stone-700"
                     onClick={() => setMenuOpen(false)}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
                 {quickFilters.map((filter) => (
-                  <span
-                    key={filter}
+                  <Link
+                    key={filter.label}
+                    href={filter.href}
+                    onClick={() => setMenuOpen(false)}
                     className="rounded-full bg-mist px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary"
                   >
-                    {filter}
-                  </span>
+                    {filter.label}
+                  </Link>
                 ))}
               </div>
             </div>

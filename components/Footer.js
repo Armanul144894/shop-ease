@@ -1,12 +1,31 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 import { ArrowRight, Instagram, Linkedin, Mail, MapPin, Phone, Send, Youtube } from 'lucide-react';
 
 const footerLinks = {
-  Explore: ['New arrivals', 'Brands', 'Home edit', 'Gift ideas', 'Flash sale'],
-  Company: ['About ShopEase', 'Journal', 'Careers', 'Press room', 'Partnerships'],
-  Service: ['Help center', 'Track your order', 'Returns', 'Shipping details', 'Contact'],
+  Explore: [
+    { label: 'All products', href: '/products' },
+    { label: 'Brands', href: '/brands' },
+    { label: 'Categories', href: '/categories' },
+    { label: 'Style edit', href: '/style' },
+    { label: 'Flash sale', href: '/#flash-sale' },
+  ],
+  Company: [
+    { label: 'About ShopEase', href: '/' },
+    { label: 'Journal', href: '/#journal' },
+    { label: 'Homepage', href: '/' },
+    { label: 'Brand pages', href: '/brands' },
+    { label: 'Category pages', href: '/categories' },
+  ],
+  Service: [
+    { label: 'Help center', href: '/' },
+    { label: 'Track your order', href: '/' },
+    { label: 'Returns', href: '/' },
+    { label: 'Shipping details', href: '/products' },
+    { label: 'Contact', href: '/' },
+  ],
 };
 
 export default function Footer() {
@@ -110,10 +129,10 @@ export default function Footer() {
               <h3 className="text-sm font-semibold uppercase tracking-[0.28em] text-white/55">{title}</h3>
               <div className="mt-4 flex flex-col gap-3">
                 {links.map((link) => (
-                  <a key={link} href="#" className="inline-flex items-center gap-2 text-sm text-stone-400 transition hover:text-white">
+                  <Link key={link.label} href={link.href} className="inline-flex items-center gap-2 text-sm text-stone-400 transition hover:text-white">
                     <ArrowRight size={14} className="text-white/30" />
-                    {link}
-                  </a>
+                    {link.label}
+                  </Link>
                 ))}
               </div>
             </div>
@@ -137,9 +156,9 @@ export default function Footer() {
         <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-stone-400 md:flex-row md:items-center md:justify-between">
           <p>Copyright 2026 ShopEase. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-4">
-            <a href="#" className="transition hover:text-white">Privacy</a>
-            <a href="#" className="transition hover:text-white">Terms</a>
-            <a href="#" className="transition hover:text-white">Accessibility</a>
+            <Link href="/" className="transition hover:text-white">Privacy</Link>
+            <Link href="/" className="transition hover:text-white">Terms</Link>
+            <Link href="/" className="transition hover:text-white">Accessibility</Link>
           </div>
         </div>
       </div>

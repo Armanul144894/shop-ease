@@ -152,6 +152,13 @@ input {
   transform: translateY(0);
 }
 
+.text-clamp-2 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
