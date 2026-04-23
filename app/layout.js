@@ -1,6 +1,7 @@
 import './globals.css'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import { StorefrontProvider } from '../components/storefront/StorefrontProvider'
 
 export const metadata = {
   title: 'ShopEase Studio | Curated shopping drops',
@@ -19,9 +20,11 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="font-body bg-[#fcfaf7] text-ink antialiased">
-        <Header />
-        {children}
-        <Footer />
+        <StorefrontProvider>
+          <Header />
+          {children}
+          <Footer />
+        </StorefrontProvider>
       </body>
     </html>
   )

@@ -3,8 +3,10 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Eye, Heart, ShoppingBag, Star } from 'lucide-react';
+import { useStorefront } from './storefront/StorefrontProvider';
 
 export default function ProductCard({ product, delay = 0 }) {
+  const { addToCart } = useStorefront();
   const [wished, setWished] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const productHref = product.slug ? `/${product.slug}` : '/products';
@@ -12,6 +14,7 @@ export default function ProductCard({ product, delay = 0 }) {
   const categoryHref = product.categorySlug ? `/${product.categorySlug}` : '/categories';
 
   const handleAddToCart = () => {
+    addToCart(product);
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 1500);
   };

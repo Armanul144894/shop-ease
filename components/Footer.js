@@ -9,8 +9,9 @@ const footerLinks = {
     { label: 'All products', href: '/products' },
     { label: 'Brands', href: '/brands' },
     { label: 'Categories', href: '/categories' },
+    { label: 'Cart', href: '/cart' },
     { label: 'Style edit', href: '/style' },
-    { label: 'Flash sale', href: '/#flash-sale' },
+    { label: 'Checkout', href: '/checkout' },
   ],
   Company: [
     { label: 'About ShopEase', href: '/' },
@@ -18,13 +19,14 @@ const footerLinks = {
     { label: 'Homepage', href: '/' },
     { label: 'Brand pages', href: '/brands' },
     { label: 'Category pages', href: '/categories' },
+    { label: 'Account', href: '/account' },
   ],
   Service: [
-    { label: 'Help center', href: '/' },
+    { label: 'Login', href: '/login' },
     { label: 'Track your order', href: '/' },
     { label: 'Returns', href: '/' },
-    { label: 'Shipping details', href: '/products' },
-    { label: 'Contact', href: '/' },
+    { label: 'Shipping details', href: '/checkout' },
+    { label: 'Cart review', href: '/cart' },
   ],
 };
 

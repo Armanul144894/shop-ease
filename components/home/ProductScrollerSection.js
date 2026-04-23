@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from '../ProductCard';
 import SectionReveal from './SectionReveal';
+import useResponsiveSlides from './useResponsiveSlides';
 
 export default function ProductScrollerSection({
   id,
@@ -14,9 +15,14 @@ export default function ProductScrollerSection({
   icon,
 }) {
   const [start, setStart] = useState(0);
-  const visible = 4;
+  const visible = useResponsiveSlides(1, 2, 4);
+  const maxStart = Math.max(0, products.length - visible);
   const canPrev = start > 0;
   const canNext = start + visible < products.length;
+
+  useEffect(() => {
+    setStart((current) => Math.min(current, maxStart));
+  }, [maxStart]);
 
   return (
     <section id={id} className="container py-10">
@@ -54,7 +60,7 @@ export default function ProductScrollerSection({
               <ChevronLeft size={18} />
             </button>
             <button
-              onClick={() => setStart((current) => Math.min(products.length - visible, current + 1))}
+              onClick={() => setStart((current) => Math.min(maxStart, current + 1))}
               disabled={!canNext}
               className={`flex h-10 w-10 items-center justify-center rounded-full border transition ${
                 canNext
@@ -67,7 +73,7 @@ export default function ProductScrollerSection({
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {products.slice(start, start + visible).map((product, index) => (
             <ProductCard key={product.id} product={product} delay={index * 70} />
           ))}

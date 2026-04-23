@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Heart, MapPin, Menu, Search, ShoppingBag, Sparkles, User, X } from 'lucide-react';
+import { useStorefront } from './storefront/StorefrontProvider';
 
 const navigation = [
   { label: 'Home', href: '/' },
@@ -19,6 +20,7 @@ const quickFilters = [
 ];
 
 export default function Header() {
+  const { cartCount, isAuthenticated, user } = useStorefront();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -91,13 +93,24 @@ export default function Header() {
               <button className="flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-600 transition hover:border-primary hover:text-primary">
                 <Heart size={18} />
               </button>
-              <button className="flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-600 transition hover:border-primary hover:text-primary">
+              <Link
+                href="/cart"
+                className="relative flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-600 transition hover:border-primary hover:text-primary"
+              >
                 <ShoppingBag size={18} />
-              </button>
-              <button className="hidden items-center gap-2 rounded-full bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary lg:inline-flex">
+                {cartCount > 0 ? (
+                  <span className="absolute -right-1 -top-1 flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-white">
+                    {cartCount}
+                  </span>
+                ) : null}
+              </Link>
+              <Link
+                href={isAuthenticated ? '/account' : '/login'}
+                className="hidden items-center gap-2 rounded-full bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary lg:inline-flex"
+              >
                 <User size={16} />
-                Account
-              </button>
+                {isAuthenticated ? user?.name?.split(' ')[0] ?? 'Account' : 'Login'}
+              </Link>
             </div>
 
             <button
@@ -145,6 +158,20 @@ export default function Header() {
                     {item.label}
                   </Link>
                 ))}
+                <Link
+                  href="/cart"
+                  className="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-semibold text-stone-700"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Cart {cartCount > 0 ? `(${cartCount})` : ''}
+                </Link>
+                <Link
+                  href={isAuthenticated ? '/account' : '/login'}
+                  className="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-semibold text-stone-700"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {isAuthenticated ? 'Account' : 'Login'}
+                </Link>
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
                 {quickFilters.map((filter) => (

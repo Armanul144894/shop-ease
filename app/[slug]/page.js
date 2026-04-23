@@ -12,7 +12,9 @@ import Breadcrumbs from '../../components/catalog/Breadcrumbs';
 import BrandCard from '../../components/catalog/BrandCard';
 import BrandLogo from '../../components/catalog/BrandLogo';
 import ProductCard from '../../components/ProductCard';
+import ProductScrollerSection from '../../components/home/ProductScrollerSection';
 import SectionHeading from '../../components/home/SectionHeading';
+import ProductPurchaseActions from '../../components/storefront/ProductPurchaseActions';
 import {
   getAllCatalogSlugs,
   getBrandBySlug,
@@ -61,7 +63,7 @@ export function generateMetadata({ params }) {
 function ProductPage({ product }) {
   const brand = getBrandBySlug(product.brandSlug);
   const category = getCategoryBySlug(product.categorySlug);
-  const relatedProducts = getRelatedProducts(product, 4);
+  const relatedProducts = getRelatedProducts(product, 8);
 
   return (
     <main>
@@ -128,8 +130,10 @@ function ProductPage({ product }) {
               </span>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/products" className="btn-primary">
+            <ProductPurchaseActions product={product} />
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/products" className="btn-secondary">
                 Continue shopping
                 <ArrowRight size={16} />
               </Link>
@@ -234,18 +238,13 @@ function ProductPage({ product }) {
         </div>
       </section>
 
-      <section className="container py-10">
-        <SectionHeading
-          eyebrow="Related products"
-          title="More products from the same world"
-          copy="Related products pull from the same brand and category so the detail page still feels like part of a bigger storefront."
-        />
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {relatedProducts.map((relatedProduct) => (
-            <ProductCard key={relatedProduct.slug} product={relatedProduct} />
-          ))}
-        </div>
-      </section>
+      <ProductScrollerSection
+        id="related-products"
+        eyebrow="Related products"
+        title="More products from the same world"
+        copy="Related products now sit inside a slider, so the product page can carry more recommendations without stretching into another static grid."
+        products={relatedProducts}
+      />
     </main>
   );
 }
