@@ -67,7 +67,7 @@ export default function Header() {
               </div>
             </Link>
 
-            <nav className="hidden flex-1 items-center justify-center gap-7 lg:flex">
+            <nav className="hidden flex-1 items-center justify-center gap-7 xl:flex">
               {navigation.map((item) => (
                 <Link
                   key={item.label}
@@ -114,7 +114,7 @@ export default function Header() {
             </div>
 
             <button
-              className="ml-auto flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-700 md:hidden"
+              className="ml-auto flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-700 xl:hidden"
               onClick={() => setMenuOpen((current) => !current)}
             >
               {menuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -135,7 +135,7 @@ export default function Header() {
         </div>
 
         {menuOpen && (
-          <div className="border-t border-stone-200/70 bg-white md:hidden">
+          <div className="border-t border-stone-200/70 bg-white xl:hidden">
             <div className="container py-4">
               <label className="flex items-center gap-2 rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-500">
                 <Search size={16} className="text-stone-400" />
