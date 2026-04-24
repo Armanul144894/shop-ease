@@ -57,14 +57,14 @@ export default function CatalogHero({
         </div>
 
         <div className="relative overflow-hidden rounded-[34px] border border-white/70 bg-stone-200 shadow-soft">
-          <div className="aspect-[4/4.2] md:aspect-[4/3.7]">
+          <div className="aspect-[4/4.2] md:aspect-[4/4.2]">
             <img src={image} alt={imageAlt} className="h-full w-full object-cover" />
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
             <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/65">{eyebrow}</p>
             <p className="mt-3 w-full text-sm leading-7 text-white/75 md:w-[22rem]">
-              Browse design-led products, discover focused edits, and move between brands, categories, and products from clean single-slug URLs.
+              Browse design-led products, discover focused edits, and move between brands, categories, and nested product URLs.
             </p>
           </div>
         </div>

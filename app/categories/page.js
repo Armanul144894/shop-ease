@@ -13,8 +13,8 @@ export default function CategoriesPage() {
     <main>
       <CatalogHero
         eyebrow="Categories"
-        title="Category pages routed through one shared slug folder"
-        copy="Categories now have dedicated browse pages too, but the public URL stays short. Shoppers can open /style or /travel without carrying a /category prefix in the address."
+        title="Category pages with short browse paths"
+        copy="Categories have dedicated browse pages, while products beneath them include the brand, category, and product name in the address."
         stats={[
           { value: catalogSummary.categoryCount, label: 'category pages' },
           { value: catalogSummary.brandCount, label: 'connected brands' },
@@ -30,7 +30,7 @@ export default function CategoriesPage() {
         <SectionHeading
           eyebrow="Category directory"
           title="Explore every storefront lane"
-          copy="Each category card opens a dedicated category product page while still using a single clean slug in the final URL."
+          copy="Each category card opens a dedicated category product page, and each product inside uses the fuller nested product URL."
         />
         <div className="mt-8 grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
           {catalogCategories.map((category) => (

@@ -9,7 +9,7 @@ export default function ProductCard({ product, delay = 0 }) {
   const { addToCart } = useStorefront();
   const [wished, setWished] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
-  const productHref = product.slug ? `/${product.slug}` : '/products';
+  const productHref = product.path ?? (product.slug ? `/${product.slug}` : '/products');
   const brandHref = product.brandSlug ? `/${product.brandSlug}` : '/brands';
   const categoryHref = product.categorySlug ? `/${product.categorySlug}` : '/categories';
 

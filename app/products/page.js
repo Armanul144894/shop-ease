@@ -19,7 +19,7 @@ export default function ProductsPage() {
       <CatalogHero
         eyebrow="Products"
         title="A full product catalog with one clean place to browse"
-        copy="Every product now lives in a larger shared catalog, making it easy to browse the storefront by product, brand, or category while keeping detail URLs short and direct."
+        copy="Every product now lives in a larger shared catalog, making it easy to browse by product, brand, or category while detail URLs show the full brand/category/product path."
         stats={[
           { value: `${catalogSummary.productCount}+`, label: 'products in catalog' },
           { value: catalogSummary.brandCount, label: 'brand partners' },
@@ -36,7 +36,7 @@ export default function ProductsPage() {
           <SectionHeading
             eyebrow="Quick paths"
             title="Jump into the catalog by category"
-            copy="These direct category links take shoppers into the shared single-slug routing model without adding route prefixes."
+            copy="These direct category links keep category pages short, while product links add the brand and product name underneath."
           />
           <div className="mt-8 flex flex-wrap gap-3">
             {catalogCategories.map((category) => (
@@ -56,7 +56,7 @@ export default function ProductsPage() {
         <SectionHeading
           eyebrow="All products"
           title="The complete storefront"
-          copy="This page is intentionally dense so shoppers can scan a large amount of product inventory without needing a separate prefix for every detail page."
+          copy="This page is intentionally dense so shoppers can scan a large amount of product inventory and open product URLs such as /nike/style/scarlet-shirt."
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {catalogProducts.map((product, index) => (

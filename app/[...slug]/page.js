@@ -73,6 +73,7 @@ function ProductPage({ product }) {
             { label: 'Home', href: '/' },
             { label: 'Products', href: '/products' },
             { label: brand?.name ?? product.brand, href: `/${product.brandSlug}` },
+            { label: category?.name ?? product.category, href: `/${product.categorySlug}` },
             { label: product.name },
           ]}
         />
@@ -352,7 +353,7 @@ function BrandPage({ brand }) {
         <SectionHeading
           eyebrow="Brand products"
           title={`Shop ${brand.name} products`}
-          copy="All products from this brand are grouped here, but the public page still comes through the same single-slug detail route model."
+          copy="All products from this brand are grouped here, with detail URLs that include the brand, category, and product name."
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((product) => (
@@ -433,7 +434,7 @@ function CategoryPage({ category }) {
           <SectionHeading
             eyebrow="Featured brands"
             title={`Brands working inside ${category.name}`}
-            copy="Category pages can still surface brand context, even though everything shares one dynamic slug folder underneath."
+            copy="Category pages can still surface brand context while product detail pages use the full brand/category/product path."
           />
           <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {category.featuredBrands.slice(0, 4).map((brand) => (

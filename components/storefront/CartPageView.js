@@ -73,7 +73,7 @@ export default function CartPageView() {
                 key={item.slug}
                 className="grid gap-5 rounded-[28px] border border-stone-200 bg-white p-5 md:grid-cols-[140px_1fr_auto]"
               >
-                <Link href={`/${item.slug}`} className="overflow-hidden rounded-[22px] bg-stone-100">
+                <Link href={item.path ?? `/${item.slug}`} className="overflow-hidden rounded-[22px] bg-stone-100">
                   <div className="aspect-[4/3]">
                     <img src={item.image} alt={item.name} className="h-full w-full object-cover" />
                   </div>
@@ -88,7 +88,7 @@ export default function CartPageView() {
                       {item.category}
                     </Link>
                   </div>
-                  <Link href={`/${item.slug}`} className="mt-3 block text-xl font-semibold text-stone-900 transition hover:text-primary">
+                  <Link href={item.path ?? `/${item.slug}`} className="mt-3 block text-xl font-semibold text-stone-900 transition hover:text-primary">
                     {item.name}
                   </Link>
                   <p className="mt-3 text-sm leading-7 text-stone-600">{item.description}</p>

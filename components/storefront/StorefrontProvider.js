@@ -99,6 +99,7 @@ function buildStarterOrders(profile) {
       items: [
         {
           slug: product.slug,
+          path: product.path,
           name: product.name,
           brand: product.brand,
           image: product.image,
@@ -301,6 +302,7 @@ export function StorefrontProvider({ children }) {
       deliveryNote,
       items: cartItems.map((item) => ({
         slug: item.slug,
+        path: item.path,
         name: item.name,
         brand: item.brand,
         image: item.image,

@@ -5,7 +5,7 @@ import { catalogBrands, catalogSummary } from '../../lib/catalog';
 
 export const metadata = {
   title: 'Brands | ShopEase Studio',
-  description: 'Discover every brand in the ShopEase catalog and jump into its dedicated single-slug product page.',
+  description: 'Discover every brand in the ShopEase catalog and jump into brand/category/product detail paths.',
 };
 
 export default function BrandsPage() {
@@ -14,11 +14,11 @@ export default function BrandsPage() {
       <CatalogHero
         eyebrow="Brands"
         title="Brand pages without the /brand route prefix"
-        copy="Each brand has its own page and product assortment, but the detail URL stays clean. A customer can go straight to /nike or /sony instead of browsing through nested route folders."
+        copy="Each brand has its own page and product assortment. A customer can go straight to /nike or /sony, then open products under paths like /nike/style/scarlet-shirt."
         stats={[
           { value: catalogSummary.brandCount, label: 'brands available' },
           { value: `${catalogSummary.productCount}+`, label: 'products across brands' },
-          { value: '1 slug', label: 'shared detail pattern' },
+          { value: '3-part', label: 'product URL pattern' },
         ]}
         primaryLink={{ href: '/products', label: 'Shop all products' }}
         secondaryLink={{ href: '/categories', label: 'Browse categories' }}
