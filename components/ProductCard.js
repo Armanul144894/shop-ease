@@ -2,16 +2,18 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Eye, Heart, ShoppingBag, Star } from 'lucide-react';
+import { Eye, Heart, Minus, Plus, ShoppingBag, Star } from 'lucide-react';
 import { useStorefront } from './storefront/StorefrontProvider';
 
 export default function ProductCard({ product, delay = 0 }) {
-  const { addToCart } = useStorefront();
+  const { addToCart, cartItems, updateCartQuantity } = useStorefront();
   const [wished, setWished] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const productHref = product.path ?? (product.slug ? `/${product.slug}` : '/products');
   const brandHref = product.brandSlug ? `/${product.brandSlug}` : '/brands';
   const categoryHref = product.categorySlug ? `/${product.categorySlug}` : '/categories';
+  const cartItem = cartItems.find((item) => item.slug === product.slug);
+  const cartQuantity = cartItem?.quantity ?? 0;
 
   const handleAddToCart = () => {
     addToCart(product);
@@ -124,21 +126,48 @@ export default function ProductCard({ product, delay = 0 }) {
               )}
             </div>
             <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-stone-400">
-              Quick add product
+              {cartQuantity > 0 ? `${cartQuantity} in cart` : 'Quick add product'}
             </p>
           </div>
 
-          <button
-            onClick={handleAddToCart}
-            className={`inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full px-4 text-xs font-bold uppercase tracking-[0.2em] transition ${
-              addedToCart
-                ? 'bg-primary text-white'
-                : 'border border-stone-200 bg-stone-50 text-stone-900 hover:border-primary hover:bg-primary hover:text-white'
-            }`}
-          >
-            <ShoppingBag size={14} />
-            {addedToCart ? 'Added' : 'Add'}
-          </button>
+          {cartQuantity > 0 ? (
+            <div className="inline-flex h-10 shrink-0 items-center rounded-full border border-primary/20 bg-mist p-1 text-primary">
+              <button
+                type="button"
+                onClick={() => updateCartQuantity(product.slug, cartQuantity - 1)}
+                className="flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white"
+                aria-label={`Decrease quantity for ${product.name}`}
+                title="Decrease quantity"
+              >
+                <Minus size={14} />
+              </button>
+              <span className="min-w-[2rem] text-center text-xs font-extrabold" aria-live="polite">
+                {cartQuantity}
+              </span>
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                className="flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white"
+                aria-label={`Add more ${product.name}`}
+                title="Add more"
+              >
+                <Plus size={14} />
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={handleAddToCart}
+              className={`inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full px-4 text-xs font-bold uppercase tracking-[0.2em] transition ${
+                addedToCart
+                  ? 'bg-primary text-white'
+                  : 'border border-stone-200 bg-stone-50 text-stone-900 hover:border-primary hover:bg-primary hover:text-white'
+              }`}
+            >
+              <ShoppingBag size={14} />
+              {addedToCart ? 'Added' : 'Add'}
+            </button>
+          )}
         </div>
       </div>
     </article>

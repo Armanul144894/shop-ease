@@ -34,7 +34,7 @@ const titleCase = (value) =>
 function resolveCartItems(cart) {
   return cart
     .map((entry) => {
-      const product = productLookup.get(entry.slug);
+      const product = productLookup.get(entry.slug) ?? entry.product;
 
       if (!product) {
         return null;
@@ -44,10 +44,27 @@ function resolveCartItems(cart) {
         ...product,
         quantity: entry.quantity,
         lineTotal: product.price * entry.quantity,
-        lineOriginalTotal: product.originalPrice * entry.quantity,
+        lineOriginalTotal: (product.originalPrice ?? product.price) * entry.quantity,
       };
     })
     .filter(Boolean);
+}
+
+function buildCartProductSnapshot(product) {
+  return {
+    slug: product.slug,
+    path: product.path ?? '/products',
+    name: product.name,
+    brand: product.brand ?? 'ShopEase',
+    brandSlug: product.brandSlug ?? 'brands',
+    category: product.category ?? 'Products',
+    categorySlug: product.categorySlug ?? 'products',
+    price: product.price,
+    originalPrice: product.originalPrice ?? product.price,
+    image: product.image,
+    description: product.description ?? product.note ?? '',
+    shipping: product.shipping ?? '2-4 business days',
+  };
 }
 
 function buildCustomerProfile({
@@ -152,6 +169,10 @@ export function StorefrontProvider({ children }) {
   const cartTotal = cartSubtotal + shippingTotal + taxTotal;
 
   const addToCart = (product, quantity = 1) => {
+    if (!product?.slug || quantity <= 0) {
+      return;
+    }
+
     setState((current) => {
       const existingItem = current.cart.find((item) => item.slug === product.slug);
 
@@ -166,9 +187,14 @@ export function StorefrontProvider({ children }) {
         };
       }
 
+      const isCatalogProduct = productLookup.has(product.slug);
+      const cartEntry = isCatalogProduct
+        ? { slug: product.slug, quantity }
+        : { slug: product.slug, quantity, product: buildCartProductSnapshot(product) };
+
       return {
         ...current,
-        cart: [...current.cart, { slug: product.slug, quantity }],
+        cart: [...current.cart, cartEntry],
       };
     });
   };

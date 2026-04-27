@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { ArrowRight, Clock3, ShoppingBag, Sparkles } from 'lucide-react';
+import { useStorefront } from './storefront/StorefrontProvider';
 
 function TimeBox({ value, label }) {
   return (
@@ -15,38 +16,66 @@ function TimeBox({ value, label }) {
 const flashProducts = [
   {
     id: 1,
+    slug: 'flash-studio-audio-set',
     name: 'Studio Audio Set',
     brand: 'Sony',
+    brandSlug: 'sony',
+    category: 'Tech',
+    categorySlug: 'tech',
     price: 189,
     originalPrice: 269,
     note: 'Clean desk setup, immersive sound',
+    description: 'Clean desk setup, immersive sound, and quick flash-sale pricing for the day.',
+    shipping: '1-3 business days',
+    path: '/products',
     image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 2,
+    slug: 'flash-scarlet-runner',
     name: 'Scarlet Runner',
     brand: 'Nike',
+    brandSlug: 'nike',
+    category: 'Style',
+    categorySlug: 'style',
     price: 129,
     originalPrice: 180,
     note: 'Lightweight build for everyday wear',
+    description: 'Lightweight everyday runner with flash-sale pricing and a polished streetwear feel.',
+    shipping: '2-4 business days',
+    path: '/products',
     image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 3,
+    slug: 'flash-creator-camera',
     name: 'Creator Camera',
     brand: 'Fujifilm',
+    brandSlug: 'fujifilm',
+    category: 'Tech',
+    categorySlug: 'tech',
     price: 649,
     originalPrice: 799,
     note: 'Sharp travel shots in a compact body',
+    description: 'Compact creator camera picked for travel shots, clean controls, and a limited event price.',
+    shipping: '1-3 business days',
+    path: '/products',
     image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 4,
+    slug: 'flash-glow-skin-ritual',
     name: 'Glow Skin Ritual',
     brand: 'Aesop',
+    brandSlug: 'aesop',
+    category: 'Wellness',
+    categorySlug: 'wellness',
     price: 72,
     originalPrice: 98,
     note: 'Bathroom shelf styling with real function',
+    description: 'Shelf-worthy daily ritual with a calmer finish and short-window flash-sale savings.',
+    shipping: '2-4 business days',
+    path: '/products',
     image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80',
   },
 ];
@@ -75,7 +104,8 @@ function FlashProduct({ product, addedId, onAdd }) {
           <span className="text-sm text-white/40 line-through">${product.originalPrice}</span>
         </div>
         <button
-          onClick={() => onAdd(product.id)}
+          type="button"
+          onClick={() => onAdd(product)}
           className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-bold transition ${
             addedId === product.id
               ? 'bg-white text-[#10211d]'
@@ -91,6 +121,7 @@ function FlashProduct({ product, addedId, onAdd }) {
 }
 
 export default function FlashSale() {
+  const { addToCart } = useStorefront();
   const [time, setTime] = useState({ h: 12, m: 45, s: 18 });
   const [addedId, setAddedId] = useState(null);
 
@@ -123,8 +154,9 @@ export default function FlashSale() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleAdd = (id) => {
-    setAddedId(id);
+  const handleAdd = (product) => {
+    addToCart(product);
+    setAddedId(product.id);
     setTimeout(() => setAddedId(null), 1500);
   };
 
